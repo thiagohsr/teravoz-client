@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon --exec 'babel-node server.js' --ignore db.json",
-    "jsonServer": "json-server --watch db.json --routes json-server-routes.js",
+    "jsonServer": "json-server --host 0.0.0.0 --watch db.json --routes json-server-routes.js",
     "dev": "npm-run-all --parallel jsonServer start",
     "test:watch": "jest --watchAll --verbose",
     "test": "jest --verbose",
