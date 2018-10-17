@@ -1,11 +1,10 @@
 const updateCallType = callType => {
-  if (callType === "call.new") {
-    return "call.standby";
-  } else if (callType === "call.standby") {
-    return "delegate";
-  } else if (callType === "delegate") {
-    return "call.ongoing";
-  }
+  const events = {
+    "call.new": "call.standby",
+    "call.standby": "delegate",
+    delegate: "call.ongoing",
+  };
+  return events[callType];
 };
 
 export { updateCallType };

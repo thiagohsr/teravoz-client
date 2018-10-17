@@ -1,5 +1,4 @@
-import axios from "axios";
-
+import express from "express";
 import {
   addCustomerContact,
   delegateCallApi,
@@ -7,10 +6,6 @@ import {
 } from "./client";
 
 import actions from "./teravoz-api";
-
-import { updateCallType } from "./common/utils";
-
-import express from "express";
 
 const router = express.Router();
 
@@ -25,14 +20,13 @@ router.post("/webhook", async (request, response) => {
   const callData = request.body;
   const { their_number: incomingCallNumber } = callData;
   const customer = await lookupCustomerContact(incomingCallNumber);
-  const isNewCustomer = customer.length ? false : true;
+  const isNewCustomer = !customer.length;
 
   if (callData.type === "call.standby") {
-    // callData.type = updateCallType(callData.type);
     if (isNewCustomer) {
-      const newCustomer = await addCustomerContact(callData);
+      await addCustomerContact(callData);
     }
-    const teravozCall = await delegateCallApi(callData, isNewCustomer);
+    await delegateCallApi(callData, isNewCustomer);
   }
 
   response.send(callData);
