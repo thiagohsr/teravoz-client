@@ -11,23 +11,23 @@ import mockAxios from "axios";
 
 describe("Api client test methods", () => {
   it(`should add customer contact in customer_contact_list`, async () => {
-    const expected_response = {
+    const expectedResponse = {
       id: 1,
       customer_number: "11999921320",
     };
     mockAxios.post.mockImplementationOnce(() =>
       Promise.resolve({
-        data: expected_response,
+        data: expectedResponse,
       })
     );
 
-    const newCustomer = await addCustomerContact(expected_response);
+    const newCustomer = await addCustomerContact(expectedResponse);
 
-    expect(newCustomer).toEqual(expected_response);
+    expect(newCustomer).toEqual(expectedResponse);
   });
 
   it(`should return queue id for a given queue number`, async () => {
-    const expected_id = 1;
+    const expectedId = 1;
     const queueNumber = 900;
     mockAxios.get.mockImplementationOnce(() =>
       Promise.resolve({
@@ -36,12 +36,12 @@ describe("Api client test methods", () => {
     );
     const queueId = await getQueueId(queueNumber);
 
-    expect(queueId).toEqual(expected_id);
+    expect(queueId).toEqual(expectedId);
   });
 
   it(`should return available agents for a given queue`, async () => {
     const queueNumber = 900;
-    const expected_response = [
+    const expectedResponse = [
       {
         id: 2,
         queueId: 2,
@@ -61,11 +61,11 @@ describe("Api client test methods", () => {
     });
     const availableAgents = await getAvailableAgentsFromQueue(queueNumber);
 
-    expect(availableAgents).toEqual(expected_response);
+    expect(availableAgents).toEqual(expectedResponse);
   });
 
   it(`should return updated agent data for give call data`, async () => {
-    const expected_response = {
+    const expectedResponse = {
       id: 2,
       queueId: 2,
       agent_number: 9010,
@@ -103,13 +103,13 @@ describe("Api client test methods", () => {
       },
     });
 
-    const updateAgent = await updateAgentWithCallData(expected_response, 900);
+    const updateAgent = await updateAgentWithCallData(expectedResponse, 900);
 
-    expect(updateAgent).toEqual(expected_response);
+    expect(updateAgent).toEqual(expectedResponse);
   });
 
   it(`should return status ok`, async () => {
-    const expected_response = { status: "ok" };
+    const expectedResponse = { status: "ok" };
     const incomingCall = {
       id: 2,
       queueId: 2,
@@ -126,18 +126,18 @@ describe("Api client test methods", () => {
     );
     const response = await delegateCallApi(incomingCall, true);
 
-    expect(response).toEqual(expected_response);
+    expect(response).toEqual(expectedResponse);
     expect(mockedCall.mock.calls[1][1].call_id).toBe(incomingCall.call_id);
-    expect(response.status).toBe(expected_response.status);
+    expect(response.status).toBe(expectedResponse.status);
   });
 
   it(`should return list with found customer contact`, async () => {
-    const expected_response = {
+    const expectedResponse = {
       customer_number: "11999921320",
       id: 10,
     };
 
-    const mockedCall = mockAxios.get.mockResolvedValue({
+    mockAxios.get.mockResolvedValue({
       data: {
         customer_number: "11999921320",
         id: 10,
@@ -145,8 +145,9 @@ describe("Api client test methods", () => {
     });
 
     const response = await lookupCustomerContact(
-      expected_response.customer_number
+      expectedResponse.customer_number
     );
-    expect(response.customer_number).toBe(expected_response.customer_number);
+
+    expect(response.customer_number).toBe(expectedResponse.customer_number);
   });
 });

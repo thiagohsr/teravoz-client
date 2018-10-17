@@ -2,18 +2,16 @@ import axios from "axios";
 import { updateCallType } from "./common/utils";
 
 /** Add new customer to customer_contact_list */
+/* eslint-disable */
 const addCustomerContact = async ({ their_number }) => {
   const incomingCallNumber = their_number;
+  /* eslint-enable */
   const newCustomer = await axios
     .post("http://localhost:3000/customer_contact_list", {
       customer_number: incomingCallNumber,
     })
-    .then(res => {
-      return res;
-    })
-    .catch(error => {
-      return error;
-    });
+    .then(res => res)
+    .catch(error => error);
   return newCustomer.data;
 };
 
@@ -40,12 +38,12 @@ const getAvailableAgentsFromQueue = async queue => {
 /** Update agent object for the first available agent with caller information */
 const updateAgentWithCallData = async (callData, queue) => {
   const availableAgents = await getAvailableAgentsFromQueue(queue);
-  const { call_id: callId, their_number: callerNumber, type: type } = callData;
+  const { call_id: callId, their_number: callerNumber, type } = callData;
   const agent = availableAgents[0];
   const agentPayload = {
     status: "unavailable",
     call_id: callId,
-    type: type,
+    type,
     caller_number: callerNumber,
   };
   const response = await axios
@@ -62,37 +60,36 @@ const updateAgentWithCallData = async (callData, queue) => {
  *  data and return request status
  */
 const delegateCallApi = async (incomingCall, isNewCustomer) => {
-  const {
-    call_id: callId,
-    their_number: incomingCallNumber,
-    type: type,
-  } = incomingCall;
+  const { call_id: callId, type } = incomingCall;
 
   // Condition to decide queue based on customer type
   const queue = isNewCustomer ? 900 : 901;
 
   // Payload to teravoz-api
-  const payload_delegate = {
+  const payloadDelegate = {
     call_id: callId,
     type: updateCallType(type),
     destination: queue,
   };
 
   const response = await axios
-    .post("http://localhost:3002/actions", payload_delegate)
-    .then(res => {
-      return res.data;
-    })
+    .post("http://localhost:3002/actions", payloadDelegate)
+    .then(res => res.data)
     .catch(error => error);
 
-  incomingCall.type = updateCallType(payload_delegate.type);
-  const callRedirection = await updateAgentWithCallData(incomingCall, queue);
+  const updateIncomingCall = {
+    ...incomingCall,
+    type: updateCallType(payloadDelegate.type),
+  };
+  await updateAgentWithCallData(updateIncomingCall, queue);
   return response;
 };
 
-/** Look for customer on contact list and return a list */
-const lookupCustomerContact = async customerNumber => {
-  return await axios
+/** Look for customer on contact list and return a list
+ *  with found customer
+ */
+const lookupCustomerContact = customerNumber =>
+  axios
     .get("http://localhost:3000/customer_contact_list", {
       params: {
         customer_number: customerNumber,
@@ -100,7 +97,6 @@ const lookupCustomerContact = async customerNumber => {
     })
     .then(res => res.data)
     .catch(error => error);
-};
 
 export {
   addCustomerContact,
