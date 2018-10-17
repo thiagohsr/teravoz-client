@@ -1,0 +1,118 @@
+{
+  "customer_contact_list": [
+    {
+      "id": 1,
+      "customer_number": "11999990000"
+    },
+    {
+      "customer_number": "11991231231",
+      "id": 2
+    },
+    {
+      "customer_number": "11950880206",
+      "id": 3
+    },
+    {
+      "customer_number": "11999921313",
+      "id": 4
+    },
+    {
+      "customer_number": "11999921315",
+      "id": 5
+    },
+    {
+      "customer_number": "11999921316",
+      "id": 6
+    },
+    {
+      "customer_number": "11999921317",
+      "id": 7
+    },
+    {
+      "customer_number": "11999921318",
+      "id": 8
+    },
+    {
+      "customer_number": "11999921319",
+      "id": 9
+    },
+    {
+      "customer_number": "11999921320",
+      "id": 10
+    },
+    {
+      "customer_number": "11999921321",
+      "id": 11
+    },
+    {
+      "customer_number": "11999921322",
+      "id": 12
+    },
+    {
+      "customer_number": "11999921320",
+      "id": 13
+    },
+    {
+      "customer_number": "11999921324",
+      "id": 14
+    },
+    {
+      "customer_number": "11999921325",
+      "id": 15
+    }
+  ],
+  "queues": [
+    {
+      "id": 1,
+      "queue": 900
+    },
+    {
+      "id": 2,
+      "queue": 901
+    }
+  ],
+  "callcenter_agents": [
+    {
+      "id": 1,
+      "queueId": 1,
+      "agent_number": 9001,
+      "status": "available"
+    },
+    {
+      "id": 2,
+      "queueId": 2,
+      "agent_number": 9010,
+      "status": "available"
+    },
+    {
+      "id": 3,
+      "queueId": 2,
+      "agent_number": 9011,
+      "status": "available"
+    },
+    {
+      "id": 4,
+      "queueId": 2,
+      "agent_number": 9012,
+      "status": "available"
+    },
+    {
+      "id": 5,
+      "queueId": 2,
+      "agent_number": 9013,
+      "status": "available"
+    },
+    {
+      "id": 6,
+      "queueId": 2,
+      "agent_number": 9014,
+      "status": "available"
+    },
+    {
+      "id": 7,
+      "queueId": 1,
+      "agent_number": 9002,
+      "status": "available"
+    }
+  ]
+}
