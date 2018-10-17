@@ -10,10 +10,10 @@ COPY ./yarn.lock /home/node/app/yarn.lock
 RUN yarn --silent
 
 # Copy files to app directory
-COPY ./server.js /home/node/app
+COPY . .
 
 # Set port to access app
-EXPOSE 3002
+EXPOSE 3002 3000
 
 # Run app
-CMD ["yarn", "start"]
+CMD ["yarn", "dev"]
