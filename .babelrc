@@ -15,14 +15,16 @@
       "module-resolver",
       {
         "alias": {
-          "api": "./api"
+          "api": "./api",
+          "settings": "./settings"
         }
       }
     ],
     [
       "styled-components",
       { "ssr": true, "displayName": true, "preprocess": false }
-    ]
+    ],
+    ["inline-dotenv"]
   ],
   "env": {
     "development": {
