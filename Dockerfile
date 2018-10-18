@@ -13,7 +13,7 @@ RUN yarn --silent
 COPY . .
 
 # Set port to access app
-EXPOSE 3002 3000
+EXPOSE 3002 3000 5000
 
 # Run app
-CMD ["yarn", "dev"]
+CMD ["yarn", "production"]

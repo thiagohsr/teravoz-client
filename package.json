@@ -4,9 +4,13 @@
   "description": "Teravoz Challenge - Client to integrate with Teravoz API",
   "main": "server.js",
   "scripts": {
+    "dashboard:dev": "node_modules/next/dist/bin/next -p 5000",
+    "dashboard:build": "node_modules/next/dist/bin/next build",
+    "dashboard:start": "node_modules/next/dist/bin/next start -H 0.0.0.0 -p 5000",
     "api": "nodemon --exec 'babel-node server.js' --ignore db.json",
     "jsonServer": "json-server --host 0.0.0.0 --watch db.json --routes json-server-routes.js",
-    "run": "npm-run-all --parallel jsonServer api",
+    "dev": "npm-run-all --parallel jsonServer api dashboard:dev",
+    "production": "yarn dashboard:build && npm-run-all --parallel jsonServer api dashboard:start",
     "test:watch": "jest --watchAll --verbose",
     "test": "jest --verbose",
     "lint": "node_modules/eslint/bin/eslint.js ."
