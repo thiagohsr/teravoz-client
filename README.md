@@ -7,6 +7,7 @@ App developed to fulfill requirements on [fullstack challenge](https://github.co
 ## Dependencies
 
 - Nodejs v10.12.0 [NVM](https://github.com/creationix/nvm#installation)
+- Docker [Install overview and guides](https://docs.docker.com/install/overview/). (it's not obligatory)
 
 ## How to run the app
 
