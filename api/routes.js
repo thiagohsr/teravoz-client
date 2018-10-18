@@ -32,7 +32,7 @@ router.post("/webhook", async (request, response) => {
   response.send(callData);
 });
 
-router.get("/health-check", (request, response) => {
+router.get("/", (request, response) => {
   response.send("server up and running");
 });
 
