@@ -1,4 +1,6 @@
 import axios from "axios";
+import { DATA_API, CLIENT_URL } from "settings";
+
 import { updateCallType } from "./common/utils";
 
 /** Add new customer to customer_contact_list */
@@ -7,7 +9,7 @@ const addCustomerContact = async ({ their_number }) => {
   const incomingCallNumber = their_number;
   /* eslint-enable */
   const newCustomer = await axios
-    .post("http://localhost:3000/customer_contact_list", {
+    .post(`${DATA_API}/customer_contact_list`, {
       customer_number: incomingCallNumber,
     })
     .then(res => res)
@@ -18,7 +20,7 @@ const addCustomerContact = async ({ their_number }) => {
 /** Return the queueId for given queueNumber */
 const getQueueId = async queueNumber => {
   const queueId = await axios
-    .get(`http://localhost:3000/queues/${queueNumber}/`)
+    .get(`${DATA_API}/queues/${queueNumber}/`)
     .then(res => res.data)
     .catch(error => error);
   return queueId[0].id;
@@ -28,7 +30,7 @@ const getQueueId = async queueNumber => {
 const getAvailableAgentsFromQueue = async queue => {
   const queueId = await getQueueId(queue);
   const availableAgents = await axios
-    .get(`http://localhost:3000/callcenter_agents/${queueId}/available-agents/`)
+    .get(`${DATA_API}/callcenter_agents/${queueId}/available-agents/`)
     .then(res => res.data)
     .catch(error => error);
 
@@ -47,7 +49,7 @@ const updateAgentWithCallData = async (callData, queue) => {
     caller_number: callerNumber,
   };
   const response = await axios
-    .patch(`http://localhost:3000/callcenter_agents/${agent.id}/`, agentPayload)
+    .patch(`${DATA_API}/callcenter_agents/${agent.id}/`, agentPayload)
     .then(res => res)
     .catch(error => error);
 
@@ -73,7 +75,7 @@ const delegateCallApi = async (incomingCall, isNewCustomer) => {
   };
 
   const response = await axios
-    .post("http://localhost:3002/actions", payloadDelegate)
+    .post(`${CLIENT_URL}/actions`, payloadDelegate)
     .then(res => res.data)
     .catch(error => error);
 
@@ -90,7 +92,7 @@ const delegateCallApi = async (incomingCall, isNewCustomer) => {
  */
 const lookupCustomerContact = customerNumber =>
   axios
-    .get("http://localhost:3000/customer_contact_list", {
+    .get(`${DATA_API}/customer_contact_list`, {
       params: {
         customer_number: customerNumber,
       },

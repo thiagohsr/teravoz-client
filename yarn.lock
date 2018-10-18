@@ -1493,6 +1493,13 @@ babel-messages@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
+babel-plugin-inline-dotenv@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/babel-plugin-inline-dotenv/-/babel-plugin-inline-dotenv-1.1.2.tgz#d9b43f48b1471506bdc5fe571a067472f16aedf6"
+  integrity sha1-2bQ/SLFHFQa9xf5XGgZ0cvFq7fY=
+  dependencies:
+    dotenv "^4.0.0"
+
 babel-plugin-istanbul@^4.1.6:
   version "4.1.6"
   resolved "https://registry.yarnpkg.com/babel-plugin-istanbul/-/babel-plugin-istanbul-4.1.6.tgz#36c59b2192efce81c5b378321b74175add1c9a45"
@@ -2666,6 +2673,11 @@ dot-prop@^4.1.0:
   integrity sha512-tUMXrxlExSW6U2EXiiKGSBVdYgtV8qlHL+C10TsW4PURY/ic+eaysnSkwB4kA/mBlCyy/IKDJ+Lc3wbWeaXtuQ==
   dependencies:
     is-obj "^1.0.0"
+
+dotenv@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
+  integrity sha1-hk7xN5rO1Vzm+V3r7NzhefegzR0=
 
 duplexer3@^0.1.4:
   version "0.1.4"

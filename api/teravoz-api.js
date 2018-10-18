@@ -1,8 +1,9 @@
 import axios from "axios";
+import { CLIENT_URL } from "settings";
 
 const actions = callData => {
   const response = axios
-    .post(`http://localhost:3002/webhook/`, callData)
+    .post(`${CLIENT_URL}/webhook/`, callData)
     .then(res => res)
     .catch(error => error);
 
