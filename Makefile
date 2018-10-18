@@ -11,9 +11,9 @@ front_setup:
 setup:	nvm_setup	node_setup	front_setup
 
 start:
-	yarn run start
+	yarn run api
 
-dev:
+run:
 	yarn run dev
 
 test:
