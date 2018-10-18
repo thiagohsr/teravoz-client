@@ -16,6 +16,9 @@ start:
 run:
 	yarn run dev
 
+production:
+	yarn run production
+
 test:
 	yarn run test
 
