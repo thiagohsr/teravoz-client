@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Fragment, Component } from "react";
 import PropTypes from "prop-types";
-import { DATA_URL } from "settings";
+import { DATA_API } from "settings";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import AppBar from "@material-ui/core/AppBar";
@@ -20,7 +20,7 @@ const styles = () => ({
 class Home extends Component {
   static async getInitialProps() {
     const agents = await axios
-      .get(`${DATA_URL}/callcenter_agents`)
+      .get(`${DATA_API}/callcenter_agents`)
       .then(res => res.data)
       .catch(error => error);
 
