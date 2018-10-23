@@ -21,36 +21,41 @@ const styles = theme => ({
 
 const Dashboard = props => {
   const { classes, agents } = props;
+
   return (
     <Fragment>
-      {agents.map(objAgent => (
-        <Grid item xs={4} key={objAgent.id}>
-          <Paper
-            className={classes.paper}
-            style={
-              objAgent.status === "unavailable"
-                ? { background: blue[300] }
-                : null
-            }
-          >
-            <Typography
-              variant="h4"
-              component="h3"
+      {agents.length
+        ? agents.map(objAgent => (
+          <Grid item xs={4} key={objAgent.id}>
+            <Paper
+              className={classes.paper}
               style={
-                objAgent.status === "unavailable" ? { color: "white" } : null
-              }
+                  objAgent.status === "unavailable"
+                    ? { background: blue[300] }
+                    : null
+                }
             >
-              {objAgent.agent_number}
-            </Typography>
-            {objAgent.caller_number ? (
-              <Typography variant="caption" component="h5">
-                Número do cliente:
-                {objAgent.caller_number}
+              <Typography
+                variant="h4"
+                component="h3"
+                style={
+                    objAgent.status === "unavailable"
+                      ? { color: "white" }
+                      : null
+                  }
+              >
+                {objAgent.agent_number}
               </Typography>
-            ) : null}
-          </Paper>
-        </Grid>
-      ))}
+              {objAgent.caller_number ? (
+                <Typography variant="caption" component="h5">
+                    Número do cliente:
+                  {objAgent.caller_number}
+                </Typography>
+                ) : null}
+            </Paper>
+          </Grid>
+          ))
+        : null}
     </Fragment>
   );
 };
