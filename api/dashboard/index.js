@@ -17,4 +17,11 @@ const getAgents = () =>
     .then(res => res.data)
     .catch(error => error);
 
-export { connect, getAgents };
+const enableAgentOnQueue = (agentId, agentNumber, agentQueueId) => {
+  axios.put(`${DATA_API}/callcenter_agents/${agentId}`, {
+    queueId: agentQueueId,
+    agent_number: agentNumber,
+    status: "available",
+  });
+};
+export { connect, enableAgentOnQueue, getAgents };
