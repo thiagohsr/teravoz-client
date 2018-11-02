@@ -6,15 +6,7 @@ import {
   lookupCustomerContact,
 } from "./client";
 
-import actions from "./teravoz-api";
-
 const router = express.Router();
-
-/** Route to dispatch calls for available agents on given queue */
-router.post("/actions", async (request, response) => {
-  const actionCall = await actions(request.body);
-  response.send({ status: actionCall.status });
-});
 
 /** Route receive Teravoz payloads, verify customer */
 router.post("/webhook", async (request, response) => {
@@ -28,6 +20,8 @@ router.post("/webhook", async (request, response) => {
       await addCustomerContact(callData);
     }
     await delegateCallApi(callData, isNewCustomer);
+  } else if (callData.type === "call.delegate") {
+    // console.log("webhook once => ", response.req.body);
   }
 
   response.send(callData);
