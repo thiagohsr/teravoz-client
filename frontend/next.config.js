@@ -1,11 +1,22 @@
 /* eslint-disable */
-const { parsed: DATA_API } = require("dotenv").config();
-const webpack = require("webpack");
+require("dotenv").config();
+const path = require("path");
+const Dotenv = require("dotenv-webpack");
 /* eslint-enable */
 
 module.exports = {
-  webpack(config) {
-    config.plugins.push(new webpack.EnvironmentPlugin(DATA_API));
+  webpack: config => {
+    config.plugins = config.plugins || [];
+
+    config.plugins = [
+      ...config.plugins,
+
+      // Read the .env file
+      new Dotenv({
+        path: path.join(__dirname, ".env"),
+        systemvars: true,
+      }),
+    ];
 
     return config;
   },
