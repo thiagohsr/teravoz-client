@@ -6,7 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { connect, getAgents } from "api/dashboard";
+import { connect, getAgents } from "services/dashboard";
+
 import Dashboard from "./components/dashboard";
 import Layout from "./components/Layout";
 
@@ -19,7 +20,6 @@ const styles = () => ({
 class Home extends Component {
   static async getInitialProps() {
     const agents = await getAgents();
-
     return {
       pageProps: {
         agents,

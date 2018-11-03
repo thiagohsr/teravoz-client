@@ -3,7 +3,7 @@ import express from "express";
 import { createServer } from "http";
 
 import fs from "fs";
-import router from "./api/routes";
+import router from "api/routes";
 
 const host = "0.0.0.0";
 const port = 3002;

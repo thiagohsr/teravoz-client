@@ -9,7 +9,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Phonelink from "@material-ui/icons/Phonelink";
 import Typography from "@material-ui/core/Typography";
-import { enableAgentOnQueue } from "api/dashboard";
+import { enableAgentOnQueue } from "services/dashboard";
 
 const styles = theme => ({
   root: {
