@@ -56,7 +56,7 @@ class Dashboard extends PureComponent {
                       : null
                   }
               >
-                <Grid container spacing={12}>
+                <Grid container spacing={16}>
                   <Grid item xs={2}>
                     <Avatar
                       style={
