@@ -9,7 +9,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Phonelink from "@material-ui/icons/Phonelink";
 import Typography from "@material-ui/core/Typography";
-import { enableAgentOnQueue } from "api/dashboard";
+import { enableAgentOnQueue } from "services/dashboard";
 
 const styles = theme => ({
   root: {
@@ -56,7 +56,7 @@ class Dashboard extends PureComponent {
                       : null
                   }
               >
-                <Grid container spacing={12}>
+                <Grid container spacing={16}>
                   <Grid item xs={2}>
                     <Avatar
                       style={
@@ -126,6 +126,6 @@ class Dashboard extends PureComponent {
 
 Dashboard.propTypes = {
   agents: PropTypes.arrayOf(PropTypes.object).isRequired,
-  classes: PropTypes.arrayOf(PropTypes.array).isRequired,
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 export default withStyles(styles)(Dashboard);

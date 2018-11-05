@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DATA_API, CLIENT_URL } from "settings";
+import { DATA_API, TERAVOZ_URL, QUEUES } from "settings";
 
 import { updateCallType } from "./common/utils";
 
@@ -65,7 +65,7 @@ const delegateCallApi = async (incomingCall, isNewCustomer) => {
   const { call_id: callId, type } = incomingCall;
 
   // Condition to decide queue based on customer type
-  const queue = isNewCustomer ? 900 : 901;
+  const queue = isNewCustomer ? QUEUES.NEW_CUSTOMER : QUEUES.CUSTOMER;
 
   // Payload to teravoz-api
   const payloadDelegate = {
@@ -75,7 +75,7 @@ const delegateCallApi = async (incomingCall, isNewCustomer) => {
   };
 
   const response = await axios
-    .post(`${CLIENT_URL}/actions`, payloadDelegate)
+    .post(`${TERAVOZ_URL}/actions`, payloadDelegate)
     .then(res => res.data)
     .catch(error => error);
 
