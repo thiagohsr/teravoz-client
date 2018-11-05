@@ -126,6 +126,6 @@ class Dashboard extends PureComponent {
 
 Dashboard.propTypes = {
   agents: PropTypes.arrayOf(PropTypes.object).isRequired,
-  classes: PropTypes.arrayOf(PropTypes.array).isRequired,
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 export default withStyles(styles)(Dashboard);

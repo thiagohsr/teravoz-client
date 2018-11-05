@@ -66,7 +66,7 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  pageProps: PropTypes.arrayOf(PropTypes.array).isRequired,
+  pageProps: PropTypes.objectOf(PropTypes.array).isRequired,
 };
 
 export default withStyles(styles)(Home);

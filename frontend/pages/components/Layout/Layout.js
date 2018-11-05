@@ -26,7 +26,7 @@ const Layout = props => {
 };
 
 Layout.propTypes = {
-  classes: PropTypes.arrayOf(PropTypes.array).isRequired,
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
   children: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
