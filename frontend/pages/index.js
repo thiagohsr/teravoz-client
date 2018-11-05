@@ -8,7 +8,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { connect, getAgents } from "services/dashboard";
 
-import Dashboard from "./components/dashboard";
+import Dashboard from "./components/Dashboard";
 import Layout from "./components/Layout";
 
 const styles = () => ({

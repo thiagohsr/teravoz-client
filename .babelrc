@@ -15,7 +15,7 @@
       "module-resolver",
       {
         "alias": {
-          "api": "./teravoz_client/api",
+          "api": "./client/api",
           "settings": "./settings",
           "services": "./frontend/services"
         }

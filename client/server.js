@@ -3,7 +3,7 @@ import express from "express";
 import { createServer } from "http";
 
 import fs from "fs";
-import router from "api/routes";
+import router from "./routes";
 
 const host = "0.0.0.0";
 const port = 3002;
@@ -26,7 +26,7 @@ server.listen(port, host, error => {
 const io = require("socket.io")(server);
 
 const agentUpdate = socket => {
-  fs.watch("./db.json", (eventType, filename) => {
+  fs.watch("./jsonServer/db.json", (eventType, filename) => {
     if (filename && eventType === "change") {
       io.emit("agentsUpdate", {
         message: `agents updated`,

@@ -4,7 +4,7 @@ import {
   addCustomerContact,
   delegateCallApi,
   lookupCustomerContact,
-} from "./client";
+} from "api/client";
 
 const router = express.Router();
 
