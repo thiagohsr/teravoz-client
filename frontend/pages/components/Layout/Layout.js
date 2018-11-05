@@ -20,9 +20,7 @@ const Layout = props => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Grid container spacing={24}>
-        {children}
-      </Grid>
+      <Grid container>{children}</Grid>
     </div>
   );
 };
