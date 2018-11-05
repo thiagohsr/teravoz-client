@@ -79,6 +79,10 @@
     {
       "customer_number": "11999921915",
       "id": 20
+    },
+    {
+      "customer_number": "11999999999",
+      "id": 21
     }
   ],
   "queues": [
@@ -93,22 +97,22 @@
   ],
   "callcenter_agents": [
     {
-      "id": 1,
       "queueId": 1,
       "agent_number": 9001,
-      "status": "available"
+      "status": "available",
+      "id": 1
     },
     {
-      "id": 2,
       "queueId": 2,
       "agent_number": 9010,
-      "status": "available"
+      "status": "available",
+      "id": 2
     },
     {
-      "id": 3,
       "queueId": 2,
       "agent_number": 9011,
-      "status": "available"
+      "status": "available",
+      "id": 3
     },
     {
       "id": 4,
