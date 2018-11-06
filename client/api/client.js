@@ -47,6 +47,7 @@ const getAvailableAgentsFromQueue = async queue => {
   }
 };
 
+/** Return a Agent or create one for given Queue number */
 const getOrCreateAgent = async queue => {
   const availableAgents = await getAvailableAgentsFromQueue(queue);
   const agentPayload = {
