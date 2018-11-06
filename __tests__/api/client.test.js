@@ -41,14 +41,12 @@ describe("Api client test methods", () => {
 
   it(`should return available agents for a given queue`, async () => {
     const queueNumber = 900;
-    const expectedResponse = [
-      {
-        id: 2,
-        queueId: 2,
-        agent_number: 9010,
-        status: "available",
-      },
-    ];
+    const expectedResponse = {
+      id: 2,
+      queueId: 2,
+      agent_number: 9010,
+      status: "available",
+    };
     mockAxios.get.mockResolvedValue({
       data: [
         {

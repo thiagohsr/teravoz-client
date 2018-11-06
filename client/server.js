@@ -19,7 +19,7 @@ const server = createServer(app);
 server.listen(port, host, error => {
   if (error) return console.log(`Error: ${error}`);
 
-  console.log(`app ready on port ${server.address().port}`);
+  console.log(`client app ready on port ${server.address().port}`);
 });
 /* eslint-enable */
 
