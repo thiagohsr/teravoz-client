@@ -1,12 +1,12 @@
 import express from "express";
 
-import { redirectCallToCallcenterAgent } from "api/client";
+import { redirectCallToCallCenterAgent } from "api/client";
 
 const router = express.Router();
 
 /** Route receive Teravoz payloads, verify customer */
 router.post("/webhook", async (request, response) => {
-  await redirectCallToCallcenterAgent(request.body);
+  await redirectCallToCallCenterAgent(request.body);
   response.send(request.body);
 });
 
