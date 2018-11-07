@@ -32,4 +32,4 @@ docker-build:
 	sudo docker build -t teravoz-callcenter -f Dockerfile .
 
 docker-run:
-	sudo docker run -p 3002:3002 -p 3000:3000 -p 5000:5000 -it --rm -v $(shell pwd) -w /home/node/app --name teravoz-app teravoz-callcenter
+	sudo docker run -p 3001:3001 -p 3002:3002 -p 3000:3000 -p 5000:5000 -it --rm -v $(shell pwd) -w /home/node/app --name teravoz-app teravoz-callcenter
