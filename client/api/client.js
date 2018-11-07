@@ -170,6 +170,7 @@ const redirectCallToCallCenterAgent = async callData => {
 
     return updateAgentWithCallData(call, call.destination);
   }
+  return { message: "Request data needs to have a type." };
 };
 
 export {

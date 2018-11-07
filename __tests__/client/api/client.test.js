@@ -348,4 +348,20 @@ describe("Api client test methods", () => {
     expect(response.call_id).toEqual(callData.call_id);
     expect(updateAgentWithCallDataMock).toBeCalled();
   });
+
+  it(`should return message if call data hasn't type key`, async () => {
+    const callData = {
+      call_id: "ed4f5f5e-91b6-4b8a-bc29-e7a9950ae953",
+      code: "123456",
+      direction: "inbound",
+      our_number: "0800000000",
+      their_number: "11999999999",
+      their_number_type: "mobile",
+      timestamp: "1541523584",
+    };
+    const expectedResponse = { message: "Request data needs to have a type." };
+    const response = await redirectCallToCallCenterAgent(callData);
+
+    expect(response).toEqual(expectedResponse);
+  });
 });
