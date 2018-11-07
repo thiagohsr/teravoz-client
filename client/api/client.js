@@ -6,6 +6,7 @@ import { updateCallType } from "api/common/utils";
 import loki from "lokijs";
 
 /* eslint-disable */
+/** package that's create in memory list of incoming calls */
 const db = new loki("incoming_calls.db");
 const incomingCalls = db.addCollection("incoming_calls");
 /* eslint-enable */
@@ -55,21 +56,24 @@ const getOrCreateAgent = async queue => {
     agent_number: queue + Math.random().toFixed(4),
     status: "available",
   };
-
   const agent =
     availableAgents ||
     (await axios
       .post(`${DATA_API}/callcenter_agents/`, agentPayload)
       .then(res => res.data)
       .catch(error => ({ message: error.message })));
-
   return agent;
 };
 
 /** Update agent object for the first available agent with caller information */
 const updateAgentWithCallData = async (callData, queue) => {
   const availableAgent = await getOrCreateAgent(queue);
-  const { call_id: callId, their_number: callerNumber, type } = callData;
+  const updateCallData = {
+    ...callData,
+    type: updateCallType(callData.type),
+  };
+
+  const { call_id: callId, their_number: callerNumber, type } = updateCallData;
   const agentPayload = {
     status: "unavailable",
     call_id: callId,
@@ -94,7 +98,7 @@ const updateAgentWithCallData = async (callData, queue) => {
 /** Return queue number for given customer type */
 const getQueueByCustomerType = customerType => {
   const queue = customerType ? QUEUES.NEW_CUSTOMER : QUEUES.CUSTOMER;
-  return queue;
+  return Number(queue);
 };
 
 /**
@@ -114,11 +118,11 @@ const delegateCallApi = async (incomingCall, isNewCustomer) => {
     type: updateCallType(type),
     destination: queue,
   };
-
   try {
     const response = await axios
       .post(`${TERAVOZ_URL}/actions`, payloadDelegate)
       .then(res => res.data);
+
     return response;
   } catch (error) {
     return { message: `Trouble on delegate call api. ${error.message}` };
@@ -145,27 +149,28 @@ const lookupCustomerContact = callPayload => {
   }
 };
 
-const redirectCallToCallcenterAgent = async callData => {
-  const customer = await lookupCustomerContact(callData);
-  const isNewCustomer = !customer.length;
+/** Receive a request body and invokes methods that's depends what type of call.
+ */
+const redirectCallToCallCenterAgent = async callData => {
+  /** save incoming call data in memory */
+  incomingCalls.insert(callData);
 
-  // redirectCallToCallcenterAgent(callData, isNewCustomer)
   if (callData.type === "call.standby") {
-    incomingCalls.insert(callData);
+    const customer = await lookupCustomerContact(callData);
+    const isNewCustomer = !customer.length;
 
     if (isNewCustomer) {
       await addCustomerContact(callData);
     }
-    await delegateCallApi(callData, isNewCustomer);
-  } else if (callData.type === "delegate") {
-    const call = incomingCalls.findOne({ call_id: callData.call_id });
-    const updateIncomingCall = {
-      ...call,
-      type: updateCallType(callData.type),
-    };
-
-    await updateAgentWithCallData(updateIncomingCall, callData.destination);
+    return delegateCallApi(callData, isNewCustomer);
   }
+  if (callData.type === "delegate") {
+    /** retrieve incoming call data from memory */
+    const call = incomingCalls.findOne({ call_id: callData.call_id });
+
+    return updateAgentWithCallData(call, call.destination);
+  }
+  return { message: "Request data needs to have a type." };
 };
 
 export {
@@ -174,7 +179,8 @@ export {
   getQueueByCustomerType,
   getQueueId,
   getAvailableAgentsFromQueue,
-  updateAgentWithCallData,
+  getOrCreateAgent,
   lookupCustomerContact,
-  redirectCallToCallcenterAgent,
+  redirectCallToCallCenterAgent,
+  updateAgentWithCallData,
 };
