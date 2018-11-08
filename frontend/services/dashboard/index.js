@@ -15,13 +15,13 @@ const getAgents = () =>
   axios
     .get(`${DATA_API}/callcenter_agents`)
     .then(res => res.data)
-    .catch(error => error);
+    .catch(error => ({ message: error.message }));
 
-const enableAgentOnQueue = (agentId, agentNumber, agentQueueId) => {
-  axios.put(`${DATA_API}/callcenter_agents/${agentId}`, {
-    queueId: agentQueueId,
-    agent_number: agentNumber,
-    status: "available",
-  });
-};
+const enableAgentOnQueue = (agentId, agentNumber, agentQueueId) => axios
+    .put(`${DATA_API}/callcenter_agents/${agentId}`, {
+      queueId: agentQueueId,
+      agent_number: agentNumber,
+      status: "available",
+    })
+    .then(res => res.data);
 export { connect, enableAgentOnQueue, getAgents };

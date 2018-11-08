@@ -17,7 +17,8 @@
         "alias": {
           "api": "./client/api",
           "settings": "./settings",
-          "services": "./frontend/services"
+          "services": "./frontend/services",
+          "frontend": "./frontend"
         }
       }
     ],

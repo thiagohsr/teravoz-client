@@ -94,7 +94,7 @@ class Dashboard extends PureComponent {
                           className={classes.callerNumber}
                         >
                             Número do cliente:
-                          {objAgent.caller_number}
+                          <span className="callerNumber">{objAgent.caller_number}</span>
                         </Typography>
                         <Divider light />
                         <Button
